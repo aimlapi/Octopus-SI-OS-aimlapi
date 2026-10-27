@@ -2,6 +2,7 @@
   "id": "system_worker_flash",
   "ceiling": {
     "interfaces": [
+      "world_provider_aimlapi",
       "world_provider_alibaba_coding_plan",
       "world_provider_anthropic",
       "world_provider_cerebras",

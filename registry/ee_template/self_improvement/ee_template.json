@@ -2,6 +2,7 @@
   "id": "self_improvement",
   "goal_class": "Improve the framework from inside its declared interfaces and worker environments by changing descriptors or source under policy, preserving replayable evidence and never introducing a special self-improvement subsystem.",
   "allowed_interfaces": [
+    "world_provider_aimlapi",
     "world_provider_alibaba_coding_plan",
     "world_provider_anthropic",
     "world_provider_cerebras",

@@ -151,6 +151,16 @@
       "headers": { "X-Title": "Octopus" }
     },
     {
+      "interface": "world_provider_aimlapi",
+      "source_name": "aimlapi",
+      "registry_entry": "aimlapi",
+      "name": "AI/ML API",
+      "developer": "AI/ML API",
+      "description": "Models from many vendors through one AI/ML API key.",
+      "key": { "env": "OCTOPUS_PROVIDER_AIMLAPI_API_KEY", "label": "AI/ML API key" },
+      "headers": { "X-AIMLAPI-Source": "agent/octopus", "X-AIMLAPI-Partner-ID": "part_N40V3uGx4cF0YN7dyuSzQzJ7" }
+    },
+    {
       "interface": "world_provider_mistral",
       "source_name": "mistral",
       "registry_entry": "mistral",

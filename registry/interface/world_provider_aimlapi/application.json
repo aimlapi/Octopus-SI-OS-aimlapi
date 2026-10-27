@@ -1,0 +1,24 @@
+{
+  "schema_version": 3,
+  "id": "world_provider_aimlapi",
+  "name": "AI/ML API",
+  "description": "Models from many vendors through one AI/ML API key.",
+  "category": "provider",
+  "developer": "AI/ML API",
+  "version": "1.0.0",
+  "icon": "sparkles",
+  "interfaces": [
+    "world_provider_aimlapi"
+  ],
+  "setup": {
+    "fields": [
+      {
+        "interface": "world_provider_aimlapi",
+        "pointer": "/interface_driver_config/transport/auth_env_key",
+        "label": "AI/ML API key",
+        "kind": "secret",
+        "required": true
+      }
+    ]
+  }
+}

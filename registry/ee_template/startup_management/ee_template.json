@@ -2,6 +2,7 @@
   "id": "startup_management",
   "goal_class": "startup_management",
   "allowed_interfaces": [
+    "world_provider_aimlapi",
     "world_provider_alibaba_coding_plan",
     "world_provider_anthropic",
     "world_provider_cerebras",
