@@ -51,7 +51,8 @@
       "world_provider_custom",
       "system_service_input",
       "system_worker_memory_observer",
-      "system_workspace_env"
+      "system_workspace_env",
+      "world_provider_aimlapi"
     ],
     "tools": [
       "browser.back",

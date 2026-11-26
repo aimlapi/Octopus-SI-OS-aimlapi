@@ -57,7 +57,8 @@
     "system_worker_memory_consolidation",
     "system_room",
     "system_worker_memory_observer",
-    "system_context_memory_projection"
+    "system_context_memory_projection",
+    "world_provider_aimlapi"
   ],
   "allowed_worker_environment_kinds": [
     "system_room"

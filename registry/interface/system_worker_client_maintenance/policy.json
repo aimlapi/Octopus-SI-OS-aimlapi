@@ -38,7 +38,8 @@
       "world_provider_lmstudio",
       "world_provider_vllm",
       "world_provider_azure_openai",
-      "world_provider_custom"
+      "world_provider_custom",
+      "world_provider_aimlapi"
     ],
     "tools": [],
     "wek": [],

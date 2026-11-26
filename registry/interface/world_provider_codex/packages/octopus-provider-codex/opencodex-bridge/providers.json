@@ -374,6 +374,37 @@
       }
     },
     {
+      "interface": "world_provider_aimlapi",
+      "source_name": "aimlapi",
+      "adapter": "openai-chat",
+      "endpoint": "https://api.aimlapi.com/v1",
+      "name": "AI/ML API",
+      "developer": "AI/ML API",
+      "description": "Models from many vendors through one AI/ML API key.",
+      "key": {
+        "env": "OCTOPUS_PROVIDER_AIMLAPI_API_KEY",
+        "label": "AI/ML API key"
+      },
+      "models": [
+        { "slug": "openai/gpt-5.6-luna", "display_name": "GPT-5.6 Luna", "context_window": 1050000, "input_modalities": ["text", "image"], "efforts": ["low", "medium", "high"], "default_effort": "medium" },
+        { "slug": "openai/gpt-5.6-sol", "display_name": "GPT-5.6 Sol", "context_window": 1050000, "input_modalities": ["text", "image"], "efforts": ["low", "medium", "high"], "default_effort": "medium" },
+        { "slug": "anthropic/claude-sonnet-5.5", "display_name": "Claude Sonnet 5.5", "context_window": 1000000, "input_modalities": ["text", "image"], "efforts": ["low", "medium", "high"], "default_effort": "medium" },
+        { "slug": "anthropic/claude-opus-5.5", "display_name": "Claude Opus 5.5", "context_window": 1000000, "input_modalities": ["text", "image"], "efforts": ["low", "medium", "high"], "default_effort": "medium" },
+        { "slug": "google/gemini-3.8-flash", "display_name": "Gemini 3.8 Flash", "context_window": 1048576, "input_modalities": ["text", "image"], "efforts": ["low", "medium", "high"], "default_effort": "medium" },
+        { "slug": "deepseek/deepseek-v4.1-flash", "display_name": "DeepSeek V4.1 Flash", "context_window": 1048576, "input_modalities": ["text", "image"], "efforts": ["low", "medium", "high"], "default_effort": "medium" },
+        { "slug": "moonshot/kimi-k3-1-pro", "display_name": "Kimi K3.1 Pro", "context_window": 1048576, "input_modalities": ["text", "image"], "efforts": ["low", "medium", "high"], "default_effort": "medium" },
+        { "slug": "z-ai/glm-5.3-flash", "display_name": "GLM 5.3 Flash", "context_window": 1048576, "input_modalities": ["text", "image"], "efforts": ["low", "medium", "high"], "default_effort": "medium" },
+        { "slug": "alibaba/qwen3.8-max", "display_name": "Qwen3.8 Max", "context_window": 1000000, "input_modalities": ["text", "image"], "efforts": ["low", "medium", "high"], "default_effort": "medium" }
+      ],
+      "model": {
+        "env": "OCTOPUS_PROVIDER_AIMLAPI_MODEL",
+        "label": "Optional model id from the AI/ML API catalog, for example alibaba/qwen3.8-flash",
+        "slug": "aimlapi-model",
+        "display_name": "AI/ML API model",
+        "efforts": ["none", "low", "medium", "high"]
+      }
+    },
+    {
       "interface": "world_provider_mistral",
       "source_name": "mistral",
       "registry_entry": "mistral",

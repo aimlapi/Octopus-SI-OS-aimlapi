@@ -51,7 +51,8 @@
       "world_provider_azure_openai",
       "world_provider_custom",
       "system_service_input",
-      "system_worker_memory_observer"
+      "system_worker_memory_observer",
+      "world_provider_aimlapi"
     ],
     "tools": [
       "workspace.apply_patch",

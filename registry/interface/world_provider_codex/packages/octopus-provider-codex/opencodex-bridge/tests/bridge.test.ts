@@ -343,6 +343,48 @@ test("gemini generateContent sends the declared safety settings and streams thro
   expect(result.text).toContain("response.completed");
 });
 
+function aimlapiDescriptor() {
+  return JSON.parse(readFileSync(resolve(import.meta.dir, "../../../../../world_provider_aimlapi/interface.json"), "utf8"));
+}
+
+test("AI/ML API sends its key only to the fixed https://api.aimlapi.com/v1 origin", () => {
+  const config = aimlapiDescriptor().interface_driver_config;
+  const transport = config.transport;
+  expect(transport.base_url).toBe("https://api.aimlapi.com/v1");
+  expect(new URL(transport.base_url).origin).toBe("https://api.aimlapi.com");
+  expect(transport.base_url_env).toBeUndefined();
+  expect(transport.auth_env_key).toBe("OCTOPUS_PROVIDER_AIMLAPI_API_KEY");
+  expect([transport.auth_header, transport.auth_value_prefix]).toEqual(["Authorization", "Bearer "]);
+  expect(transport.headers).toEqual({});
+  expect(config.private_config.opencodex.adapter).toBe("openai-chat");
+  expect(config.private_config.opencodex.allow_private_network).toBe(false);
+  const catalog = config.private_config.model_catalog.map((row: { model: string }) => row.model);
+  expect(catalog).toContain(config.private_config.model);
+  expect(catalog).toContain("aimlapi-model");
+});
+
+test("an AI/ML API turn carries its bearer key upstream and a redirect to another host gets neither key nor body", async () => {
+  const transport = aimlapiDescriptor().interface_driver_config.transport;
+  let foreign = 0;
+  const elsewhere = Bun.serve({ hostname: "127.0.0.1", port: 0, fetch() { foreign += 1; return new Response("no"); } });
+  servers.push(elsewhere);
+  const ok = await exchange({ auth_header: transport.auth_header, auth_value_prefix: transport.auth_value_prefix, headers: transport.headers }, sse([
+    [null, { id: "c", object: "chat.completion.chunk", choices: [{ index: 0, delta: { role: "assistant", content: "aimlapi says hi" }, finish_reason: null }] }],
+    [null, { id: "c", object: "chat.completion.chunk", choices: [{ index: 0, delta: {}, finish_reason: "stop" }] }],
+    [null, "[DONE]"],
+  ]));
+  expect(ok.status).toBe(200);
+  expect(ok.observed.path).toBe("/v1/chat/completions");
+  expect(ok.observed.headers.get("authorization")).toBe("Bearer test-secret");
+  expect(ok.observed.headers.get("x-aimlapi-source")).toBeNull();
+  expect(ok.text).toContain("aimlapi says hi");
+  const moved = await exchange({ auth_header: transport.auth_header, auth_value_prefix: transport.auth_value_prefix, headers: transport.headers },
+    new Response(null, { status: 307, headers: { Location: `http://127.0.0.1:${elsewhere.port}/v1/chat/completions` } }));
+  expect(moved.status).toBeGreaterThanOrEqual(400);
+  expect(moved.requests).toBe(1);
+  expect(foreign).toBe(0);
+});
+
 test("Gemini prompt and response blocks retain Google's reasons for streamed and buffered replies", async () => {
   const ratings = [{ category: "HARM_CATEGORY_DANGEROUS_CONTENT", probability: "HIGH", blocked: true }];
   for (const payload of [

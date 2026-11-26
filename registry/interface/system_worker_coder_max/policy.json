@@ -62,7 +62,8 @@
       "system_remote_exec",
       "system_gui",
       "system_service_input",
-      "system_worker_memory_observer"
+      "system_worker_memory_observer",
+      "world_provider_aimlapi"
     ],
     "tools": [
       "coder.apply_patch",

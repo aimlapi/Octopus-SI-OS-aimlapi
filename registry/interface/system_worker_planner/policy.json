@@ -49,7 +49,8 @@
       "system_worker_flash",
       "system_room",
       "system_service_input",
-      "system_worker_memory_observer"
+      "system_worker_memory_observer",
+      "world_provider_aimlapi"
     ],
     "tools": [
       "artifact.list",
